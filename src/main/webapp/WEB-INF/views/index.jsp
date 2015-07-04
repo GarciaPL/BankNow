@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>BankNow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='<spring:url value="/resources/css/bootstrap.css" />' rel='stylesheet' type='text/css'/>
     <style type="text/css">
         .boxer {
             width: 300px;
@@ -56,9 +58,13 @@
             margin-top: 10%;
         }
     </style>
+    <script type="text/javascript" src='<spring:url value="/resources/js/jquery-1.11.3.min.js" />'
+            type='text/javascript'></script>
+    <script type="text/javascript" src='<spring:url value="/resources/js/bootstrap/bootstrap.min.js" />'
+            type='text/javascript'></script>
 </head>
 <body>
-<div align="center">
+<div class="container" align="center">
     <div class="boxer">
         <div class="box-row">
             <div class="box"><img border="0" alt="banknow"

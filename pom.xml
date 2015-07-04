@@ -31,6 +31,9 @@
         <jstl.version>1.2</jstl.version>
         <servlet.version>3.1.0</servlet.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
+        <jackson.core.version>2.5.0</jackson.core.version>
+        <jackson.databind.version>2.5.0</jackson.databind.version>
+        <jackson.annotations.version>2.5.0</jackson.annotations.version>
     </properties>
 
     <dependencies>
@@ -88,6 +91,22 @@
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
+        </dependency>
+        <!-- JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.databind.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.annotations.version}</version>
         </dependency>
         <!-- Logging -->
         <dependency>

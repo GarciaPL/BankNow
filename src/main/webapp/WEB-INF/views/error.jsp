@@ -33,24 +33,25 @@
 
 <div class="container">
     <div class="row text-center" style="margin-top:80px;">
-        <div class="row text-center">
-            <div class="col-md-12">
-                <div class="error-template">
-                    <h1>
-                        Oops!</h1><br/>
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1><br/>
 
-                    <img border="0" alt="currencyFair"
-                         src='<spring:url value="/resources/images/404.png" />'>
+                <img border="0" alt="currencyFair"
+                     src='<spring:url value="/resources/images/404.png" />'>
 
-                    <h2>Requested page not found!</h2>
+                <h2>Requested page not found!</h2>
 
-                    <div style="margin-top:15px"></div><br/><br/>
-                    <div class="error-actions">
-                        <a class="btn btn-primary btn-lg" href="index">Home</a>
-                    </div>
+                <div style="margin-top:15px"></div>
+                <br/><br/>
+
+                <div class="error-actions">
+                    <a class="btn btn-primary btn-lg" href="index">Home</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
