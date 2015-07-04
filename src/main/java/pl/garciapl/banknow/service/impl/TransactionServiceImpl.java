@@ -24,6 +24,6 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> getAllTransactions() {
-        return null;
+        return transactionDao.getAllTransactions();
     }
 }

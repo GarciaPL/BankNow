@@ -23,7 +23,7 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public List<Account> getAccounts() {
-        return null;
+    public List<Account> getAllAccounts() {
+        return entityManager.createQuery("Select a FROM Account a", Account.class).getResultList();
     }
 }

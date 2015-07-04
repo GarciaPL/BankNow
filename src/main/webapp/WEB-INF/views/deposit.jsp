@@ -26,18 +26,14 @@
         <h2>Deposit money</h2><br/><br/>
 
         <div class="row text-center">
-            <form method="POST" action="account" accept-charset="UTF-8" role="form" id="accountform"
+            <form method="POST" action="deposit" accept-charset="UTF-8" role="form" id="accountform"
                   class="form-horizontal">
                 <fieldset>
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="name">Account name</label>
+                        <label class="col-md-4 control-label" for="accounts">Account name</label>
 
-                        <div class="col-md-4">
-                            <input id="name" name="name" type="text" minlength="5" maxlength="30" placeholder="name for account"
-                                   class="form-control input-md" required="">
-                        </div>
                         <div class="col-md-4">
                             <select id="accounts" name="accounts" class="form-control">
                                 <c:forEach items="${accounts}" var="element">
@@ -67,7 +63,7 @@
 
                         <div class="col-md-4">
                             <button id="buttonSave" name="buttonSave" class="btn btn-success btn-lg" type="submit">
-                                Transfer
+                                Deposit
                             </button>
                             <button onclick="clearMsg()" id="buttonCancel" name="buttonCancel" class="btn btn-danger btn-lg" type="reset">
                                 Reset

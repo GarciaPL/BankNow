@@ -1,30 +1,25 @@
 package pl.garciapl.banknow.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * Created by lukasz on 04.07.15.
  */
-@Entity
-//@Table(name = "Transactions", schema = "BankNow")
+@Entity(name = "Transaction")
 public class Transaction implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    @Column(name = "sender")
-    private String sender;
+    @Column(name = "sender", nullable = false)
+    private Integer sender;
 
-    @Column(name = "recipient")
-    private String recipient;
+    @Column(name = "recipient", nullable = false)
+    private Integer recipient;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -32,33 +27,33 @@ public class Transaction implements Serializable {
     public Transaction() {
     }
 
-    public Transaction(String sender, String recipient, BigDecimal amount) {
+    public Transaction(Integer sender, Integer recipient, BigDecimal amount) {
         this.sender = sender;
         this.recipient = recipient;
         this.amount = amount;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getSender() {
+    public Integer getSender() {
         return sender;
     }
 
-    public void setSender(String sender) {
+    public void setSender(Integer sender) {
         this.sender = sender;
     }
 
-    public String getRecipient() {
+    public Integer getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(String recipient) {
+    public void setRecipient(Integer recipient) {
         this.recipient = recipient;
     }
 
@@ -73,7 +68,7 @@ public class Transaction implements Serializable {
     @Override
     public String toString() {
         return "Transaction{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", sender='" + sender + '\'' +
                 ", recipient='" + recipient + '\'' +
                 ", amount=" + amount +

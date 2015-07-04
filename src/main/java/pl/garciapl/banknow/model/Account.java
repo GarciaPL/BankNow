@@ -1,34 +1,30 @@
 package pl.garciapl.banknow.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Created by lukasz on 04.07.15.
  */
-@Entity
-//@Table(name = "Accounts", schema = "BankNow")
+@Entity(name = "Account")
 public class Account implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "iban")
+    @Column(name = "iban", nullable = false)
     private Integer iban;
 
     @Column(name = "balance")
@@ -40,11 +36,20 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public String getId() {
+    public Account(String name, String surname, String address, Integer iban, BigDecimal balance, String currency) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.iban = iban;
+        this.balance = balance;
+        this.currency = currency;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -85,7 +90,7 @@ public class Account implements Serializable {
     }
 
     public void setBalance(BigDecimal balance) {
-        this.balance = balance;
+        this.balance = balance.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public String getCurrency() {

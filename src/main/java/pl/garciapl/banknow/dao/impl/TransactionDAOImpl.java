@@ -23,7 +23,7 @@ public class TransactionDAOImpl implements TransactionDAO {
     }
 
     @Override
-    public List<Transaction> getTransactions() {
-        return null;
+    public List<Transaction> getAllTransactions() {
+        return entityManager.createQuery("Select t FROM Transaction t", Transaction.class).getResultList();
     }
 }

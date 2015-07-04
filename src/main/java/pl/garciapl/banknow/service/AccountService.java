@@ -11,5 +11,5 @@ public interface AccountService {
 
     void createAccount(Account account);
 
-    List<Account> getAccounts();
+    List<Account> getAllAccounts();
 }

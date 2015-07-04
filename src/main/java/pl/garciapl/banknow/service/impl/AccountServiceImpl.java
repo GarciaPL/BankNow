@@ -19,11 +19,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void createAccount(Account account) {
-
+        accountDao.createAccount(account);
     }
 
     @Override
-    public List<Account> getAccounts() {
-        return null;
+    public List<Account> getAllAccounts() {
+        return accountDao.getAllAccounts();
     }
 }

@@ -26,7 +26,7 @@
         <h2>Transfer money</h2><br/><br/>
 
         <div class="row text-center">
-            <form method="POST" action="account" accept-charset="UTF-8" role="form" id="accountform"
+            <form method="POST" action="transfer" accept-charset="UTF-8" role="form" id="accountform"
                   class="form-horizontal">
                 <fieldset>
 
@@ -58,10 +58,10 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="balance">Balance</label>
+                        <label class="col-md-4 control-label" for="amount">Amount</label>
 
                         <div class="col-md-4">
-                            <input id="balance" name="balance" class="form-control" type="number" value="0" min="0" step="0.01"
+                            <input id="amount" name="amount" class="form-control" type="number" value="0" min="0" step="0.01"
                                    data-number-to-fixed="2" data-number-stepfactor="100"
                                    placeholder="balance">
                         </div>

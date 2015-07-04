@@ -11,5 +11,5 @@ public interface TransactionDAO {
 
     void storeTransaction(Transaction transaction);
 
-    List<Transaction> getTransactions();
+    List<Transaction> getAllTransactions();
 }
