@@ -12,9 +12,15 @@
     <script type="text/javascript" src='<spring:url value="/resources/js/validation/jqBootstrapValidation.js" />'
             type='text/javascript'></script>
     <script>
-        $(function () { $("input").not("[type=submit]").jqBootstrapValidation(); } );
+        $(function () {
+            $("input").not("[type=submit]").jqBootstrapValidation();
+        });
         function clearMsg() {
             $("#message").empty();
+        }
+        function generateIBAN() {
+
+            $("#iban").val('123123123'); //collisions
         }
     </script>
 </head>
@@ -38,7 +44,41 @@
                         <label class="col-md-4 control-label" for="name">Name</label>
 
                         <div class="col-md-4">
-                            <input id="name" name="name" type="text" minlength="5" maxlength="30" placeholder="name for account"
+                            <input id="name" name="name" type="text" minlength="5" maxlength="30"
+                                   placeholder="name of account owner"
+                                   class="form-control input-md" required="">
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="surname">Surname</label>
+
+                        <div class="col-md-4">
+                            <input id="surname" name="surname" type="text" minlength="5" maxlength="30"
+                                   placeholder="surname of account owner"
+                                   class="form-control input-md" required="">
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="address">Address</label>
+
+                        <div class="col-md-4">
+                            <input id="address" name="address" type="text" minlength="5" maxlength="50"
+                                   placeholder="address of account owner"
+                                   class="form-control input-md" required="">
+                        </div>
+                    </div>
+
+                    <!-- Number input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="phone">Phone</label>
+
+                        <div class="col-md-4">
+                            <input id="phone" name="phone" type="number" data-validation-regex-regex="/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/" data-validation-regex-message="Must be a phone number"
+                                   placeholder="phone of account owner"
                                    class="form-control input-md" required="">
                         </div>
                     </div>
@@ -48,9 +88,14 @@
                         <label class="col-md-4 control-label" for="iban">IBAN</label>
 
                         <div class="col-md-4">
-                            <input id="iban" name="iban" type="number" placeholder="number for account"
-                                   class="form-control input-md" required="">
-
+                            <div class="input-group">
+                                <input id="iban" name="iban" type="number" minlength="1"
+                                       placeholder="number for account"
+                                       class="form-control input-md" required="">
+                                <span class="input-group-btn">
+                                    <button onclick="generateIBAN()" class="btn btn-default" type="button">Generate</button>
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -59,7 +104,8 @@
                         <label class="col-md-4 control-label" for="balance">Balance</label>
 
                         <div class="col-md-4">
-                            <input id="balance" name="balance" class="form-control" type="number" value="0" min="0" step="0.01"
+                            <input id="balance" name="balance" class="form-control" type="number" value="0" min="0"
+                                   step="0.01"
                                    data-number-to-fixed="2" data-number-stepfactor="100"
                                    placeholder="balance for account">
                         </div>
@@ -79,7 +125,8 @@
                     </div>
 
                     <div style="margin-top:15px"></div>
-                    <div id="message" style="text-align: center; color: red"><c:out value="${message}"/></div><br/>
+                    <div id="message" style="text-align: center; color: red"><c:out value="${message}"/></div>
+                    <br/>
 
                     <!-- Button (Double) -->
                     <div class="form-group">
@@ -89,7 +136,8 @@
                             <button id="buttonSave" name="buttonSave" class="btn btn-success btn-lg" type="submit">
                                 Save
                             </button>
-                            <button onclick="clearMsg()" id="buttonCancel" name="buttonCancel" class="btn btn-danger btn-lg" type="reset">
+                            <button onclick="clearMsg()" id="buttonCancel" name="buttonCancel"
+                                    class="btn btn-danger btn-lg" type="reset">
                                 Reset
                             </button>
                         </div>

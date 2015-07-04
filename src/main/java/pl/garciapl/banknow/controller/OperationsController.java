@@ -1,6 +1,7 @@
 package pl.garciapl.banknow.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class OperationsController {
 
     @RequestMapping(value = "/deposit", method = RequestMethod.GET)
-    public String deposit() {
+    public String deposit(Model model) {
         return "deposit";
     }
 
     @RequestMapping(value = "/transfer", method = RequestMethod.GET)
-    public String transfer() {
+    public String transfer(Model model) {
         return "transfer";
     }
 
