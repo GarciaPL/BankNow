@@ -3,6 +3,7 @@ package pl.garciapl.banknow.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * Created by lukasz on 04.07.15.
@@ -24,8 +25,11 @@ public class Account implements Serializable {
     @Column(name = "address", nullable = false)
     private String address;
 
+    @Column(name = "phone", nullable = false)
+    private BigInteger phone;
+
     @Column(name = "iban", nullable = false)
-    private Integer iban;
+    private BigInteger iban;
 
     @Column(name = "balance")
     private BigDecimal balance;
@@ -36,10 +40,11 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(String name, String surname, String address, Integer iban, BigDecimal balance, String currency) {
+    public Account(String name, String surname, String address, BigInteger phone, BigInteger iban, BigDecimal balance, String currency) {
         this.name = name;
         this.surname = surname;
         this.address = address;
+        this.phone = phone;
         this.iban = iban;
         this.balance = balance;
         this.currency = currency;
@@ -77,11 +82,19 @@ public class Account implements Serializable {
         this.address = address;
     }
 
-    public Integer getIban() {
+    public BigInteger getPhone() {
+        return phone;
+    }
+
+    public void setPhone(BigInteger phone) {
+        this.phone = phone;
+    }
+
+    public BigInteger getIban() {
         return iban;
     }
 
-    public void setIban(Integer iban) {
+    public void setIban(BigInteger iban) {
         this.iban = iban;
     }
 
@@ -104,10 +117,11 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "Account{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", address='" + address + '\'' +
+                ", phone=" + phone +
                 ", iban=" + iban +
                 ", balance=" + balance +
                 ", currency='" + currency + '\'' +

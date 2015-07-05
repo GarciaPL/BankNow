@@ -19,8 +19,8 @@
             $("#message").empty();
         }
         function generateIBAN() {
-
-            $("#iban").val('123123123'); //collisions
+            var iban = Math.floor(Math.random() * 10000000000000000);
+            $("#iban").val(iban);
         }
     </script>
 </head>
@@ -44,7 +44,8 @@
                         <label class="col-md-4 control-label" for="name">Name</label>
 
                         <div class="col-md-4">
-                            <input id="name" name="name" type="text" minlength="5" maxlength="30"
+                            <input id="name" name="name" type="text" pattern="^[a-zA-Z]+$" data-validation-pattern-message="Contains only letters"
+                                   minlength="5" maxlength="30"
                                    placeholder="name of account owner"
                                    class="form-control input-md" required="">
                         </div>
@@ -55,7 +56,8 @@
                         <label class="col-md-4 control-label" for="surname">Surname</label>
 
                         <div class="col-md-4">
-                            <input id="surname" name="surname" type="text" minlength="5" maxlength="30"
+                            <input id="surname" name="surname" type="text" pattern="^[a-zA-Z]+$" data-validation-pattern-message="Contains only letters"
+                                   minlength="5" maxlength="30"
                                    placeholder="surname of account owner"
                                    class="form-control input-md" required="">
                         </div>
@@ -66,7 +68,8 @@
                         <label class="col-md-4 control-label" for="address">Address</label>
 
                         <div class="col-md-4">
-                            <input id="address" name="address" type="text" minlength="5" maxlength="50"
+                            <input id="address" name="address" type="text"
+                                   minlength="5" maxlength="50"
                                    placeholder="address of account owner"
                                    class="form-control input-md" required="">
                         </div>
@@ -77,8 +80,9 @@
                         <label class="col-md-4 control-label" for="phone">Phone</label>
 
                         <div class="col-md-4">
-                            <input id="phone" name="phone" type="number" data-validation-regex-regex="/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/" data-validation-regex-message="Must be a phone number"
-                                   placeholder="phone of account owner"
+                            <input id="phone" name="phone" type="number" pattern="^[0-9]{9,11}$"
+                                   data-validation-regex-message="Must be a phone number"
+                                   placeholder="phone of account owner (9 - 11 digits)"
                                    class="form-control input-md" required="">
                         </div>
                     </div>

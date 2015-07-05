@@ -26,36 +26,45 @@
         <h2>Deposit money</h2><br/><br/>
 
         <div class="row text-center">
-            <form method="POST" action="deposit" accept-charset="UTF-8" role="form" id="accountform"
+            <form method="POST" action="deposit" accept-charset="UTF-8" role="form" id="depositform"
                   class="form-horizontal">
                 <fieldset>
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="accounts">Account name</label>
+                        <label class="col-md-4 control-label" for="accounts">Account</label>
 
-                        <div class="col-md-4">
-                            <select id="accounts" name="accounts" class="form-control">
-                                <c:forEach items="${accounts}" var="element">
-                                    <option value="${element}">${element}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                        <c:choose>
+                            <c:when test="${fn:length(accounts) gt 0}">
+                                <div class="col-md-6">
+                                    <select id="accounts" name="accounts" class="form-control">
+                                        <c:forEach items="${accounts}" var="element">
+                                            <option value="${element.iban}">${element.name} ${element.surname} | IBAN : ${element.iban} | Balance : ${element.balance}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-md-4">No accounts</div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
 
                     <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="amount">Amount</label>
 
-                        <div class="col-md-4">
-                            <input id="amount" name="amount" class="form-control" type="number" value="0" min="0" step="0.01"
+                        <div class="col-md-6">
+                            <input id="amount" name="amount" class="form-control" type="number" value="0" min="0"
+                                   step="0.01"
                                    data-number-to-fixed="2" data-number-stepfactor="100"
                                    placeholder="balance">
                         </div>
                     </div>
 
                     <div style="margin-top:15px"></div>
-                    <div id="message" style="text-align: center; color: red"><c:out value="${message}"/></div><br/>
+                    <div id="message" style="text-align: center; color: red"><c:out value="${message}"/></div>
+                    <br/>
 
                     <!-- Button (Double) -->
                     <div class="form-group">
@@ -65,7 +74,8 @@
                             <button id="buttonSave" name="buttonSave" class="btn btn-success btn-lg" type="submit">
                                 Deposit
                             </button>
-                            <button onclick="clearMsg()" id="buttonCancel" name="buttonCancel" class="btn btn-danger btn-lg" type="reset">
+                            <button onclick="clearMsg()" id="buttonCancel" name="buttonCancel"
+                                    class="btn btn-danger btn-lg" type="reset">
                                 Reset
                             </button>
                         </div>

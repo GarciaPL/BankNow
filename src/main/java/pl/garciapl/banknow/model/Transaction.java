@@ -3,6 +3,7 @@ package pl.garciapl.banknow.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * Created by lukasz on 04.07.15.
@@ -16,10 +17,10 @@ public class Transaction implements Serializable {
     private Integer id;
 
     @Column(name = "sender", nullable = false)
-    private Integer sender;
+    private BigInteger sender;
 
     @Column(name = "recipient", nullable = false)
-    private Integer recipient;
+    private BigInteger recipient;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -27,7 +28,7 @@ public class Transaction implements Serializable {
     public Transaction() {
     }
 
-    public Transaction(Integer sender, Integer recipient, BigDecimal amount) {
+    public Transaction(BigInteger sender, BigInteger recipient, BigDecimal amount) {
         this.sender = sender;
         this.recipient = recipient;
         this.amount = amount;
@@ -41,19 +42,19 @@ public class Transaction implements Serializable {
         this.id = id;
     }
 
-    public Integer getSender() {
+    public BigInteger getSender() {
         return sender;
     }
 
-    public void setSender(Integer sender) {
+    public void setSender(BigInteger sender) {
         this.sender = sender;
     }
 
-    public Integer getRecipient() {
+    public BigInteger getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(Integer recipient) {
+    public void setRecipient(BigInteger recipient) {
         this.recipient = recipient;
     }
 

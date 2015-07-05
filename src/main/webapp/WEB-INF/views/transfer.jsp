@@ -26,7 +26,7 @@
         <h2>Transfer money</h2><br/><br/>
 
         <div class="row text-center">
-            <form method="POST" action="transfer" accept-charset="UTF-8" role="form" id="accountform"
+            <form method="POST" action="transfer" accept-charset="UTF-8" role="form" id="transferform"
                   class="form-horizontal">
                 <fieldset>
 
@@ -34,33 +34,47 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="sender">Sender</label>
 
-                        <div class="col-md-4">
-                            <select id="sender" name="sender" class="form-control">
-                                <c:forEach items="${accounts}" var="element">
-                                    <option value="${element}">${element}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                        <c:choose>
+                            <c:when test="${fn:length(accounts) gt 0}">
+                                <div class="col-md-6">
+                                    <select id="sender" name="sender" class="form-control">
+                                        <c:forEach items="${accounts}" var="element">
+                                            <option value="${element.iban}">${element.name} ${element.surname} | IBAN : ${element.iban} | Balance : ${element.balance}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-md-4">No accounts</div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
 
                     <!-- Select Basic -->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="recipient">Recipient</label>
 
-                        <div class="col-md-4">
-                            <select id="recipient" name="recipient" class="form-control">
-                                <c:forEach items="${accounts}" var="element">
-                                    <option value="${element}">${element}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                        <c:choose>
+                            <c:when test="${fn:length(accounts) gt 0}">
+                                <div class="col-md-6">
+                                    <select id="recipient" name="recipient" class="form-control">
+                                        <c:forEach items="${accounts}" var="element">
+                                            <option value="${element.iban}">${element.name} ${element.surname} | IBAN : ${element.iban} | Balance : ${element.balance}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-md-4">No accounts</div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
 
                     <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="amount">Amount</label>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <input id="amount" name="amount" class="form-control" type="number" value="0" min="0" step="0.01"
                                    data-number-to-fixed="2" data-number-stepfactor="100"
                                    placeholder="balance">

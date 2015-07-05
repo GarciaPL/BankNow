@@ -6,6 +6,7 @@ import pl.garciapl.banknow.model.Account;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -23,7 +24,17 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
+    public void updateAccount(Account account) {
+        entityManager.merge(account);
+    }
+
+    @Override
     public List<Account> getAllAccounts() {
         return entityManager.createQuery("Select a FROM Account a", Account.class).getResultList();
+    }
+
+    @Override
+    public Account getAccountById(BigInteger account) {
+        return entityManager.createQuery("Select a FROM Account a where a.id = ?1", Account.class).setParameter(1, account).getSingleResult();
     }
 }

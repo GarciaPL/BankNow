@@ -6,6 +6,7 @@ import pl.garciapl.banknow.dao.AccountDAO;
 import pl.garciapl.banknow.model.Account;
 import pl.garciapl.banknow.service.AccountService;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -23,7 +24,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public void updateAccount(Account account) {
+        accountDao.updateAccount(account);
+    }
+
+    @Override
     public List<Account> getAllAccounts() {
         return accountDao.getAllAccounts();
     }
+
+    @Override
+    public Account getAccountById(BigInteger account) {
+        return accountDao.getAccountById(account);
+    }
+
 }

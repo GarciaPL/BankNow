@@ -11,6 +11,7 @@ import pl.garciapl.banknow.model.Transaction;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public class TransactionDAOTest {
     @Test
     public void persistObjectTest() {
         Assert.assertEquals(0, entityManager.createQuery("from Transaction").getResultList().size());
-        Transaction transaction = new Transaction(123, 345, new BigDecimal(25));
+        Transaction transaction = new Transaction(new BigInteger("123"), new BigInteger("234"), new BigDecimal(25));
         entityManager.persist(transaction);
         entityManager.flush();
         Assert.assertEquals(1, entityManager.createQuery("from Transaction").getResultList().size());

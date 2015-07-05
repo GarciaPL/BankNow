@@ -1,9 +1,7 @@
 package pl.garciapl.banknow.controller.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import pl.garciapl.banknow.util.MoneySerializer;
-
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * Created by lukasz on 04.07.15.
@@ -13,9 +11,8 @@ public class AccountForm {
     private String name;
     private String surname;
     private String address;
-    private Integer phone;
-    private Integer iban;
-    @JsonSerialize(using = MoneySerializer.class)
+    private BigInteger phone;
+    private BigInteger iban;
     private BigDecimal balance;
     private String currency;
 
@@ -27,11 +24,11 @@ public class AccountForm {
         this.name = name;
     }
 
-    public Integer getIban() {
+    public BigInteger getIban() {
         return iban;
     }
 
-    public void setIban(Integer iban) {
+    public void setIban(BigInteger iban) {
         this.iban = iban;
     }
 
@@ -67,11 +64,11 @@ public class AccountForm {
         this.address = address;
     }
 
-    public Integer getPhone() {
+    public BigInteger getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(BigInteger phone) {
         this.phone = phone;
     }
 

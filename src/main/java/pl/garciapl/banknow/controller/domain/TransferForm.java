@@ -1,35 +1,38 @@
 package pl.garciapl.banknow.controller.domain;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 /**
  * Created by lukasz on 05.07.15.
  */
 public class TransferForm {
 
-    private String sender;
-    private String recipient;
-    private String amount;
+    private BigInteger sender;
+    private BigInteger recipient;
+    private BigDecimal amount;
 
-    public String getSender() {
+    public BigInteger getSender() {
         return sender;
     }
 
-    public void setSender(String sender) {
+    public void setSender(BigInteger sender) {
         this.sender = sender;
     }
 
-    public String getRecipient() {
+    public BigInteger getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(String recipient) {
+    public void setRecipient(BigInteger recipient) {
         this.recipient = recipient;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

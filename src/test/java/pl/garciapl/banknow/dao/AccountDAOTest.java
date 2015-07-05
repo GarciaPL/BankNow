@@ -11,6 +11,7 @@ import pl.garciapl.banknow.model.Account;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public class AccountDAOTest {
     @Test
     public void persistObjectTest() {
         Assert.assertEquals(0, entityManager.createQuery("from Account").getResultList().size());
-        Account account = new Account("john", "malkovich", "Ireland", 123, new BigDecimal(25), "EUR");
+        Account account = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25), "EUR");
         entityManager.persist(account);
         entityManager.flush();
         Assert.assertEquals(1, entityManager.createQuery("from Account").getResultList().size());
