@@ -25,7 +25,7 @@ public class AccountController {
 
     private List<CurrencyUnit> currencyUnits;
 
-    private AccountController() {
+    public AccountController() {
         this.currencyUnits = CurrencyUnit.registeredCurrencies();
     }
 

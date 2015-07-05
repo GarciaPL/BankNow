@@ -12,8 +12,6 @@ public interface AccountService {
 
     void createAccount(Account account) throws AccountExistsException;
 
-    void updateAccount(Account account);
-
     List<Account> getAllAccounts();
 
 }

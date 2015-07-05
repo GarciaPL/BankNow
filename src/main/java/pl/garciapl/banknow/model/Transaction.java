@@ -16,7 +16,7 @@ public class Transaction implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "sender", nullable = false)
+    @Column(name = "sender")
     private BigInteger sender;
 
     @Column(name = "recipient", nullable = false)

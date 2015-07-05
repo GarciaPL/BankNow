@@ -1,26 +1,26 @@
 package pl.garciapl.banknow.controller;
 
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import java.util.logging.Logger;
 
 /**
  * Created by lukasz on 04.07.15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
+@ContextConfiguration(classes = HomeController.class)
 public class HomeControllerTest {
-
-    private Logger logger = Logger.getLogger(getClass().getName());
 
     private MockMvc mockMvc;
     private InternalResourceViewResolver viewResolver;
@@ -39,6 +39,18 @@ public class HomeControllerTest {
 
     @Test
     public void homeControllerTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/home")).andExpect(MockMvcResultMatchers.status().isOk());
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/hello")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+        Assert.assertEquals("Hello BankNow!", contentAsString);
+    }
+
+    @Test
+    public void indexControllerTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/index")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("index")).andReturn();
+    }
+
+    @Test
+    public void mainControllerTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("index")).andReturn();
     }
 }
