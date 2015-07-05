@@ -10,7 +10,8 @@ import pl.garciapl.banknow.service.exceptions.AccountExistsException;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * AccountServiceImpl - provides business logic for account purposes
+ * @author lukasz
  */
 public class AccountServiceImpl implements AccountService {
 
@@ -18,6 +19,11 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountDAO accountDao;
 
+    /**
+     * Creates account
+     * @param account Account
+     * @throws AccountExistsException
+     */
     @Override
     public void createAccount(Account account) throws AccountExistsException {
         Account accountByIban = accountDao.getAccountByIban(account.getIban());
@@ -33,6 +39,10 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    /**
+     * Fetches all accounts
+     * @return List of accounts
+     */
     @Override
     public List<Account> getAllAccounts() {
         return accountDao.getAllAccounts();

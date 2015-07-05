@@ -8,13 +8,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.garciapl.banknow.service.TransactionService;
 
 /**
- * Created by lukasz on 04.07.15.
+ * TransactionsController - responsible for providing transactions information
+ * @author lukasz
  */
 @Controller
 public class TransactionsController {
 
+    /**
+     * TransactionService - responsible for performing actions related with transaction
+     */
     @Autowired
     private TransactionService transactionService;
+
+    /**
+     * Returns view for performing desposit operations
+     * @param model Model
+     * @return Transaction view
+     */
 
     @RequestMapping(value = "/transactions", method = RequestMethod.GET)
     public String transactions(Model model) {

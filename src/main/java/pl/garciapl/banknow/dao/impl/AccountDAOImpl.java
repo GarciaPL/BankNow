@@ -10,7 +10,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * AccountDAOImpl - provides data access for account purposes
+ * @author lukasz
  */
 @Transactional
 public class AccountDAOImpl implements AccountDAO {
@@ -18,21 +19,38 @@ public class AccountDAOImpl implements AccountDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Persists account model
+     * @param account Account
+     */
     @Override
     public void createAccount(Account account) {
         entityManager.persist(account);
     }
 
+    /**
+     * Updates account model
+     * @param account Account
+     */
     @Override
     public void updateAccount(Account account) {
         entityManager.merge(account);
     }
 
+    /**
+     * Fetches all accounts
+     * @return List of Accounts
+     */
     @Override
     public List<Account> getAllAccounts() {
         return entityManager.createQuery("Select a FROM Account a", Account.class).getResultList();
     }
 
+    /**
+     * Fetches account for particular iban
+     * @param iban IBAN
+     * @return Account or null
+     */
     @Override
     public Account getAccountByIban(BigInteger iban) {
         List<Account> results = entityManager.createQuery("Select a FROM Account a where a.iban = ?1", Account.class).setParameter(1, iban).getResultList();
@@ -43,6 +61,12 @@ public class AccountDAOImpl implements AccountDAO {
         }
     }
 
+    /**
+     * Fetches account with particular name and surname
+     * @param name Name
+     * @param surname Surname
+     * @return Account or null
+     */
     @Override
     public Account getAccountByNameSurname(String name, String surname) {
         List<Account> results = entityManager.createQuery("Select a FROM Account a where a.name like ?1 and a.surname like ?2", Account.class).

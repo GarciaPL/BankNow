@@ -1,0 +1,8 @@
+pl.garciapl.banknow.controller
+pl.garciapl.banknow.controller.domain
+pl.garciapl.banknow.dao
+pl.garciapl.banknow.dao.impl
+pl.garciapl.banknow.model
+pl.garciapl.banknow.service
+pl.garciapl.banknow.service.exceptions
+pl.garciapl.banknow.service.impl

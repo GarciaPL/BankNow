@@ -5,7 +5,8 @@ import pl.garciapl.banknow.model.Transaction;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * TransactionDAO - interface for TransactionDAOImpl
+ * @author lukasz
  */
 public interface TransactionDAO {
 

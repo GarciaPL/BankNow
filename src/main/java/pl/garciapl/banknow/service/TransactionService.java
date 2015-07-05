@@ -9,7 +9,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * TransactionService - interface for TransactionServiceImpl
+ * @author lukasz
  */
 public interface TransactionService {
 

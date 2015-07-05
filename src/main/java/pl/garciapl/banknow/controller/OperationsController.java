@@ -14,19 +14,35 @@ import pl.garciapl.banknow.service.TransactionService;
 import pl.garciapl.banknow.service.exceptions.GenericBankNowException;
 import pl.garciapl.banknow.service.exceptions.InsufficientFundsException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * OperationsController - responsible for perform deposit and transfer operations
+ *
+ * @author lukasz
  */
 @Controller
 public class OperationsController {
 
+    /**
+     * AccountService - responsible for performing actions on account
+     */
     @Autowired
     private AccountService accountService;
 
+    /**
+     * TransactionService - responsible for performing actions related with transaction
+     */
     @Autowired
     private TransactionService transactionService;
+
+    /**
+     * Returns view for performing deposit operations
+     *
+     * @param model Model
+     * @return Deposit view
+     */
 
     @RequestMapping(value = "/deposit", method = RequestMethod.GET)
     public String getDeposit(Model model) {
@@ -35,6 +51,15 @@ public class OperationsController {
         return "deposit";
     }
 
+    /**
+     * Performs deposit of funds on account
+     *
+     * @param depositForm DepositForm
+     * @param result      BindingResult
+     * @param model       Model
+     * @return Model with appropriate message and accounts
+     */
+
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
     public String makeDeposit(DepositForm depositForm, BindingResult result, Model model) {
         List<Account> accounts = accountService.getAllAccounts();
@@ -42,19 +67,28 @@ public class OperationsController {
             model.addAttribute("message", "Wrong data provided");
             model.addAttribute("accounts", accounts);
             return null;
+        } else if (depositForm.getRecipient() == null || depositForm.getAmount() == null) {
+            model.addAttribute("message", "Empty account or amount");
+            model.addAttribute("accounts", accounts);
+            return null;
+        } else if (depositForm.getAmount().compareTo(BigDecimal.ZERO) == 0) {
+            model.addAttribute("message", "Please provide appropriate amount of founds");
+            model.addAttribute("accounts", accounts);
+            return null;
         } else {
-            if (depositForm.getRecipient() == null || depositForm.getAmount() == null) {
-                model.addAttribute("message", "Empty account or amount");
-                model.addAttribute("accounts", accounts);
-                return null;
-            } else {
-                transactionService.makeDeposit(depositForm.getRecipient(), depositForm.getAmount());
-                model.addAttribute("message", "Deposit successfully executed");
-                model.addAttribute("accounts", accounts);
-                return "redirect:deposit";
-            }
+            transactionService.makeDeposit(depositForm.getRecipient(), depositForm.getAmount());
+            model.addAttribute("message", "Deposit successfully executed");
+            model.addAttribute("accounts", accounts);
+            return "redirect:deposit";
         }
     }
+
+    /**
+     * Returns view for performing transfer operations
+     *
+     * @param model Model
+     * @return Transfer view
+     */
 
     @RequestMapping(value = "/transfer", method = RequestMethod.GET)
     public String getTransfer(Model model) {
@@ -62,6 +96,15 @@ public class OperationsController {
         model.addAttribute("accounts", accounts);
         return "transfer";
     }
+
+    /**
+     * Performs transfer of funds from one account to another account
+     *
+     * @param transferForm TransferForm
+     * @param result       BindingResult
+     * @param model        Model
+     * @return Model with appropriate message and accounts
+     */
 
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     public String makeTransfer(TransferForm transferForm, BindingResult result, Model model) {
@@ -72,6 +115,10 @@ public class OperationsController {
             return null;
         } else if (transferForm.getSender() == null || transferForm.getRecipient() == null || transferForm.getAmount() == null) {
             model.addAttribute("message", "Empty sender, recipient or amount");
+            model.addAttribute("accounts", accounts);
+            return null;
+        } else if (transferForm.getAmount().compareTo(BigDecimal.ZERO) == 0) {
+            model.addAttribute("message", "Please provide appropriate amount of founds");
             model.addAttribute("accounts", accounts);
             return null;
         } else {

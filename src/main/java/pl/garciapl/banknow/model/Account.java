@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * Created by lukasz on 04.07.15.
+ * Account
+ * @author lukasz
  */
 @Entity(name = "Account")
 public class Account implements Serializable {

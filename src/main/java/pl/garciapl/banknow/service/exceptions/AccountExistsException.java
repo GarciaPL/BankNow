@@ -1,7 +1,7 @@
 package pl.garciapl.banknow.service.exceptions;
 
 /**
- * Created by lukasz on 05.07.15.
+ * AccountExistsException
  */
 public class AccountExistsException extends Exception {
 

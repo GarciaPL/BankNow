@@ -6,7 +6,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * AccountDAO - interface for AccountDAOImpl
+ * @author lukasz
  */
 public interface AccountDAO {
 

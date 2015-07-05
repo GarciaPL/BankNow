@@ -15,25 +15,46 @@ import pl.garciapl.banknow.service.exceptions.AccountExistsException;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * AccountController - responsible for creation of account
+ * @author lukasz
  */
 @Controller
 public class AccountController {
 
+    /**
+     * AccountService - responsible for performing actions on account
+     */
     @Autowired
     private AccountService accountService;
 
+    /**
+     * Currencies list compatible with ISO 4217
+     */
     private List<CurrencyUnit> currencyUnits;
 
     public AccountController() {
         this.currencyUnits = CurrencyUnit.registeredCurrencies();
     }
 
+    /**
+     * Returns view with form to creation of account
+     * @param model Model
+     * @return Account view
+     */
+
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String getAccount(Model model) {
         model.addAttribute("currencies", currencyUnits);
         return "account";
     }
+
+    /**
+     * Performs registration of new account
+     * @param accountForm AccountForm
+     * @param result BindingResult
+     * @param model Model
+     * @return Model with appropriate message and currencies
+     */
 
     @RequestMapping(value = "/account", method = RequestMethod.POST)
     public String createAccount(AccountForm accountForm, BindingResult result, Model model) {

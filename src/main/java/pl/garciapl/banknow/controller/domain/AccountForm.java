@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * Created by lukasz on 04.07.15.
+ * AccountForm - model for form of account
+ * @author lukasz
  */
 public class AccountForm {
 

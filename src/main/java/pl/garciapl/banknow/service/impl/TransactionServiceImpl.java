@@ -16,7 +16,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * TransactionServiceImpl - provides business logic for transaction purposes
+ * @author lukasz
  */
 public class TransactionServiceImpl implements TransactionService {
 
@@ -28,11 +29,23 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private AccountDAO accountDao;
 
+    /**
+     * Fetches all transactions
+     * @return List of transactions
+     */
     @Override
     public List<Transaction> getAllTransactions() {
         return transactionDao.getAllTransactions();
     }
 
+    /**
+     * Performs transfer of funds between two accounts
+     * @param sender Sender IBAN
+     * @param recipient Recipient IBAN
+     * @param amount Amount of funds
+     * @throws InsufficientFundsException
+     * @throws GenericBankNowException
+     */
     @Override
     public void makeTransfer(BigInteger sender, BigInteger recipient, BigDecimal amount) throws InsufficientFundsException, GenericBankNowException {
         if (sender.compareTo(recipient) == 0) {
@@ -54,6 +67,11 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
+    /**
+     * Performs deposit of funds to one account
+     * @param account Recipient IBAN
+     * @param amount Amount of funds
+     */
     @Override
     public void makeDeposit(BigInteger account, BigDecimal amount) {
         Account accountDeposit = accountDao.getAccountByIban(account);

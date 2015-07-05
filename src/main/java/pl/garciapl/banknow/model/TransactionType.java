@@ -1,7 +1,8 @@
 package pl.garciapl.banknow.model;
 
 /**
- * Created by lukasz on 05.07.15.
+ * TransactionType
+ * @author lukasz
  */
 public enum TransactionType {
     DEPOSIT, TRANSFER

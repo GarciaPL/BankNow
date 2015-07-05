@@ -109,8 +109,8 @@
 
                         <div class="col-md-4">
                             <input id="balance" name="balance" class="form-control" type="number" value="0" min="0"
-                                   step="0.01"
-                                   data-number-to-fixed="2" data-number-stepfactor="100"
+                                   pattern="^\d+$" data-validation-pattern-message="Contains only numbers"
+                                   step="0.01" data-number-to-fixed="2" data-number-stepfactor="100"
                                    placeholder="balance for account">
                         </div>
                     </div>

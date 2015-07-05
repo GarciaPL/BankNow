@@ -1,7 +1,7 @@
 package pl.garciapl.banknow.service.exceptions;
 
 /**
- * Created by lukasz on 05.07.15.
+ * InsufficientFundsException
  */
 public class InsufficientFundsException extends Exception {
 

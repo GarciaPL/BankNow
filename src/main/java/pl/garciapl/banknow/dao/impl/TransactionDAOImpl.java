@@ -9,7 +9,8 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * TransactionDAOImpl - provides data access for transaction purposes
+ * @author lukasz
  */
 @Transactional
 public class TransactionDAOImpl implements TransactionDAO {
@@ -17,11 +18,19 @@ public class TransactionDAOImpl implements TransactionDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Persists transaction model
+     * @param transaction Transaction
+     */
     @Override
     public void storeTransaction(Transaction transaction) {
         entityManager.persist(transaction);
     }
 
+    /**
+     * Fetches all transactions
+     * @return List of transactions
+     */
     @Override
     public List<Transaction> getAllTransactions() {
         return entityManager.createQuery("Select t FROM Transaction t", Transaction.class).getResultList();

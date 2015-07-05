@@ -61,7 +61,7 @@
                             <input id="amount" name="amount" class="form-control" type="number" value="0" min="0"
                                    step="0.01"
                                    data-number-to-fixed="2" data-number-stepfactor="100"
-                                   placeholder="balance">
+                                   placeholder="amount of funds">
                         </div>
                     </div>
 
