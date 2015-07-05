@@ -1,8 +1,8 @@
 package pl.garciapl.banknow.service;
 
 import pl.garciapl.banknow.model.Account;
+import pl.garciapl.banknow.service.exceptions.AccountExistsException;
 
-import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -10,12 +10,10 @@ import java.util.List;
  */
 public interface AccountService {
 
-    void createAccount(Account account);
+    void createAccount(Account account) throws AccountExistsException;
 
     void updateAccount(Account account);
 
     List<Account> getAllAccounts();
-
-    Account getAccountById(BigInteger account);
 
 }

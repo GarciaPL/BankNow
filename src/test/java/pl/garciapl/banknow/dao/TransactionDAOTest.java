@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import pl.garciapl.banknow.model.Transaction;
+import pl.garciapl.banknow.model.TransactionType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,7 +35,7 @@ public class TransactionDAOTest {
     @Test
     public void persistObjectTest() {
         Assert.assertEquals(0, entityManager.createQuery("from Transaction").getResultList().size());
-        Transaction transaction = new Transaction(new BigInteger("123"), new BigInteger("234"), new BigDecimal(25));
+        Transaction transaction = new Transaction(new BigInteger("123"), new BigInteger("234"), new BigDecimal(25), TransactionType.DEPOSIT);
         entityManager.persist(transaction);
         entityManager.flush();
         Assert.assertEquals(1, entityManager.createQuery("from Transaction").getResultList().size());

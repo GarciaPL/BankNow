@@ -25,13 +25,18 @@ public class Transaction implements Serializable {
     @Column(name = "amount")
     private BigDecimal amount;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private TransactionType type;
+
     public Transaction() {
     }
 
-    public Transaction(BigInteger sender, BigInteger recipient, BigDecimal amount) {
+    public Transaction(BigInteger sender, BigInteger recipient, BigDecimal amount, TransactionType type) {
         this.sender = sender;
         this.recipient = recipient;
         this.amount = amount;
+        this.type = type;
     }
 
     public Integer getId() {
@@ -66,13 +71,22 @@ public class Transaction implements Serializable {
         this.amount = amount.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
+    public TransactionType getType() {
+        return type;
+    }
+
+    public void setType(TransactionType transactionType) {
+        this.type = transactionType;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
-                ", sender='" + sender + '\'' +
-                ", recipient='" + recipient + '\'' +
+                ", sender=" + sender +
+                ", recipient=" + recipient +
                 ", amount=" + amount +
+                ", transactionType=" + type +
                 '}';
     }
 }

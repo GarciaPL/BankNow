@@ -12,6 +12,9 @@
     <script>
         function clearMsg() {
             $("#message").empty();
+            $( '#depositform' ).each(function(){
+                this.reset();
+            });
         }
     </script>
 </head>
@@ -32,12 +35,12 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="accounts">Account</label>
+                        <label class="col-md-4 control-label" for="recipient">Account</label>
 
                         <c:choose>
                             <c:when test="${fn:length(accounts) gt 0}">
                                 <div class="col-md-6">
-                                    <select id="accounts" name="accounts" class="form-control">
+                                    <select id="recipient" name="recipient" class="form-control">
                                         <c:forEach items="${accounts}" var="element">
                                             <option value="${element.iban}">${element.name} ${element.surname} | IBAN : ${element.iban} | Balance : ${element.balance}</option>
                                         </c:forEach>

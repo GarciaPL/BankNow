@@ -38,7 +38,7 @@
                 <h1>
                     Oops!</h1><br/>
 
-                <img border="0" alt="currencyFair"
+                <img border="0" alt="banknow"
                      src='<spring:url value="/resources/images/404.png" />'>
 
                 <h2>Requested page not found!</h2>

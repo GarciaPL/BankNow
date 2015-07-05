@@ -16,5 +16,7 @@ public interface AccountDAO {
 
     List<Account> getAllAccounts();
 
-    Account getAccountById(BigInteger account);
+    Account getAccountByIban(BigInteger iban);
+
+    Account getAccountByNameSurname(String name, String surname);
 }

@@ -80,7 +80,7 @@
                         <label class="col-md-4 control-label" for="phone">Phone</label>
 
                         <div class="col-md-4">
-                            <input id="phone" name="phone" type="number" pattern="^[0-9]{9,11}$"
+                            <input id="phone" name="phone" type="text" pattern="\d{9,11}" minlength="9" maxlength="11"
                                    data-validation-regex-message="Must be a phone number"
                                    placeholder="phone of account owner (9 - 11 digits)"
                                    class="form-control input-md" required="">
@@ -155,6 +155,7 @@
         <a class="btn btn-primary btn-lg text-center" href="index">
             Back
         </a>
+        <div style="margin-bottom:40px"></div>
     </div>
 </div>
 </body>

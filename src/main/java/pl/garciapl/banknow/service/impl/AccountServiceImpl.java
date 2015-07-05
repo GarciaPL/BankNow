@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import pl.garciapl.banknow.dao.AccountDAO;
 import pl.garciapl.banknow.model.Account;
 import pl.garciapl.banknow.service.AccountService;
+import pl.garciapl.banknow.service.exceptions.AccountExistsException;
 
-import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -19,8 +19,18 @@ public class AccountServiceImpl implements AccountService {
     private AccountDAO accountDao;
 
     @Override
-    public void createAccount(Account account) {
-        accountDao.createAccount(account);
+    public void createAccount(Account account) throws AccountExistsException {
+        Account accountByIban = accountDao.getAccountByIban(account.getIban());
+        if (accountByIban != null) {
+            throw new AccountExistsException("Account already exists with iban : " + account.getIban());
+        } else {
+            Account accountByNameSurname = accountDao.getAccountByNameSurname(account.getName(), account.getSurname());
+            if (accountByNameSurname != null) {
+                throw new AccountExistsException("Account already exists with name : " + account.getName() + " or surname : " + account.getSurname());
+            } else {
+                accountDao.createAccount(account);
+            }
+        }
     }
 
     @Override
@@ -31,11 +41,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> getAllAccounts() {
         return accountDao.getAllAccounts();
-    }
-
-    @Override
-    public Account getAccountById(BigInteger account) {
-        return accountDao.getAccountById(account);
     }
 
 }

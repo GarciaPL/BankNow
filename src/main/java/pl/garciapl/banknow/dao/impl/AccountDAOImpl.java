@@ -34,7 +34,23 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public Account getAccountById(BigInteger account) {
-        return entityManager.createQuery("Select a FROM Account a where a.id = ?1", Account.class).setParameter(1, account).getSingleResult();
+    public Account getAccountByIban(BigInteger iban) {
+        List<Account> results = entityManager.createQuery("Select a FROM Account a where a.iban = ?1", Account.class).setParameter(1, iban).getResultList();
+        if (results == null || results.isEmpty()) {
+            return null;
+        } else {
+            return results.get(0);
+        }
+    }
+
+    @Override
+    public Account getAccountByNameSurname(String name, String surname) {
+        List<Account> results = entityManager.createQuery("Select a FROM Account a where a.name like ?1 and a.surname like ?2", Account.class).
+                setParameter(1, name).setParameter(2, surname).getResultList();
+        if (results == null || results.isEmpty()) {
+            return null;
+        } else {
+            return results.get(0);
+        }
     }
 }

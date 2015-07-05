@@ -12,6 +12,9 @@
     <script>
         function clearMsg() {
             $("#message").empty();
+            $( '#transferform' ).each(function(){
+                this.reset();
+            });
         }
     </script>
 </head>

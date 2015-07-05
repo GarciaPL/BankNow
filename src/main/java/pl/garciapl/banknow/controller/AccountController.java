@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.garciapl.banknow.controller.domain.AccountForm;
 import pl.garciapl.banknow.model.Account;
 import pl.garciapl.banknow.service.AccountService;
+import pl.garciapl.banknow.service.exceptions.AccountExistsException;
 
 import java.util.List;
 
@@ -41,8 +42,14 @@ public class AccountController {
             model.addAttribute("currencies", currencyUnits);
             return null;
         } else {
-            accountService.createAccount(new Account(accountForm.getName(), accountForm.getSurname(), accountForm.getAddress(),
-                    accountForm.getPhone(), accountForm.getIban(), accountForm.getBalance(), accountForm.getCurrency()));
+            try {
+                accountService.createAccount(new Account(accountForm.getName(), accountForm.getSurname(), accountForm.getAddress(),
+                        accountForm.getPhone(), accountForm.getIban(), accountForm.getBalance(), accountForm.getCurrency()));
+            } catch (AccountExistsException e) {
+                model.addAttribute("message", e.getMessage());
+                model.addAttribute("currencies", currencyUnits);
+                return "account";
+            }
             model.addAttribute("message", "Account successfully created");
             model.addAttribute("currencies", currencyUnits);
             return "account";

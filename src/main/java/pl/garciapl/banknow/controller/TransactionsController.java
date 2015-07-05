@@ -18,9 +18,7 @@ public class TransactionsController {
 
     @RequestMapping(value = "/transactions", method = RequestMethod.GET)
     public String transactions(Model model) {
-
         model.addAttribute("transactions", transactionService.getAllTransactions());
-
         return "transactions";
     }
 }
