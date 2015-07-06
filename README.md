@@ -33,6 +33,8 @@
 - Mockito - 1.9.5
 - Hamcrest - 1.3
 - Twitter Bootstrap - 3.3.4
+- DataTables - 1.10.7
+- jqBootstrapValidation - 1.3.6
 
 ## Functionalities
 1. Create account
@@ -50,4 +52,6 @@ Code released under the MIT License (MIT). Docs released under Creative Commons.
 - [Twitter Bootstrap](http://getbootstrap.com)
 - [HSQLDB](http://hsqldb.org)
 - [Jetty](http://www.eclipse.org/jetty/)
+- [DataTables](https://datatables.net)
+- [jqBootstrapValidation](http://reactiveraven.github.io/jqBootstrapValidation/)
 
