@@ -43,7 +43,10 @@
 4. View transactions
 
 ## Jetty
-To run jetty use command **mvn jetty:run** in diretory of project. After that application should be accessible under context **http://localhost:9090/banknow/**
+To run jetty use command **mvn jetty:run** in directory of project. After that application should be accessible under context **http://localhost:9090/banknow/**
+
+## WAR
+War can be build using command **mvn war:war** in directory of project. War will be accessible under directory /target and called **banknow.war**
 
 ## License
 Code released under the MIT License (MIT). Docs released under Creative Commons.
