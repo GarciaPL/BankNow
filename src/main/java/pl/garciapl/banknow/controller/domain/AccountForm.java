@@ -73,16 +73,4 @@ public class AccountForm {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "AccountForm{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", address='" + address + '\'' +
-                ", phone=" + phone +
-                ", iban=" + iban +
-                ", balance=" + balance +
-                ", currency='" + currency + '\'' +
-                '}';
-    }
 }

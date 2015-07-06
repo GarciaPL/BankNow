@@ -115,17 +115,4 @@ public class Account implements Serializable {
         this.currency = currency;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", address='" + address + '\'' +
-                ", phone=" + phone +
-                ", iban=" + iban +
-                ", balance=" + balance +
-                ", currency='" + currency + '\'' +
-                '}';
-    }
 }

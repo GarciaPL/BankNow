@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * AccountController - responsible for creation of account
+ *
  * @author lukasz
  */
 @Controller
@@ -38,6 +39,7 @@ public class AccountController {
 
     /**
      * Returns view with form to creation of account
+     *
      * @param model Model
      * @return Account view
      */
@@ -50,9 +52,10 @@ public class AccountController {
 
     /**
      * Performs registration of new account
+     *
      * @param accountForm AccountForm
-     * @param result BindingResult
-     * @param model Model
+     * @param result      BindingResult
+     * @param model       Model
      * @return Model with appropriate message and currencies
      */
 
@@ -69,7 +72,7 @@ public class AccountController {
             } catch (AccountExistsException e) {
                 model.addAttribute("message", e.getMessage());
                 model.addAttribute("currencies", currencyUnits);
-                return "account";
+                return null;
             }
             model.addAttribute("message", "Account successfully created");
             model.addAttribute("currencies", currencyUnits);

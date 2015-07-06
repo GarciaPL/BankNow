@@ -17,7 +17,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * AccountDAOTest
+ * @author lukasz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:banknow-db-ctx.xml")
@@ -86,11 +87,23 @@ public class AccountDAOTest {
     }
 
     @Test
+    public void getAccountByIbanReturnsNull() {
+        Account accountByIban = accountDao.getAccountByIban(account.getIban());
+        Assert.assertEquals(null, accountByIban);
+    }
+
+    @Test
     public void getAccountByNameSurname() {
         entityManager.persist(account);
         entityManager.flush();
         Account accountByNameSurname = accountDao.getAccountByNameSurname(account.getName(), account.getSurname());
         Assert.assertEquals(account.getName(), accountByNameSurname.getName());
         Assert.assertEquals(account.getSurname(), accountByNameSurname.getSurname());
+    }
+
+    @Test
+    public void getAccountByNameSurnameReturnsNull() {
+        Account accountByNameSurname = accountDao.getAccountByNameSurname(account.getName(), account.getSurname());
+        Assert.assertEquals(null, accountByNameSurname);
     }
 }

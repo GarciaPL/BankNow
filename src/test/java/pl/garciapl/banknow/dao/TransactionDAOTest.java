@@ -18,7 +18,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Created by lukasz on 04.07.15.
+ * TransactionDAOTest
+ * @author lukasz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:banknow-db-ctx.xml")

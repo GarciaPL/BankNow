@@ -18,7 +18,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Created by lukasz on 05.07.15.
+ * AccountServiceTest
+ * @author lukasz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:banknow-ctx.xml", "classpath:banknow-db-ctx.xml"})
@@ -31,40 +32,46 @@ public class AccountServiceTest {
     @Autowired
     private AccountService accountService;
 
-    private Account account;
+    private Account firstAccount;
+    private Account secondAccount;
 
     @Before
     public void setup() {
-        account = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25), "EUR");
+        firstAccount = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25), "EUR");
+        secondAccount = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("2345678901"), new BigDecimal(25), "EUR");
     }
 
     @Test
     public void createAccountTest() throws AccountExistsException {
-        accountService.createAccount(account);
+        accountService.createAccount(firstAccount);
         Assert.assertEquals(1, entityManager.createQuery("from Account").getResultList().size());
-        Assert.assertEquals(account.getName(), entityManager.createQuery("from Account", Account.class).getSingleResult().getName());
-        Assert.assertEquals(account.getSurname(), entityManager.createQuery("from Account", Account.class).getSingleResult().getSurname());
-    }
-
-    @Test(expected = AccountExistsException.class)
-    public void createAccountExistsExceptionTest() throws AccountExistsException {
-        accountService.createAccount(account);
-        accountService.createAccount(account);
+        Assert.assertEquals(firstAccount.getName(), entityManager.createQuery("from Account", Account.class).getSingleResult().getName());
+        Assert.assertEquals(firstAccount.getSurname(), entityManager.createQuery("from Account", Account.class).getSingleResult().getSurname());
     }
 
     @Test
-    public void createAccountExistsTest() {
+    public void createAccountExistsIbanTest() {
         try {
-            accountService.createAccount(account);
-            accountService.createAccount(account);
+            accountService.createAccount(firstAccount);
+            accountService.createAccount(firstAccount);
         } catch (AccountExistsException e) {
-            Assert.assertEquals("Account already exists with iban : " + account.getIban().toString(), e.getMessage());
+            Assert.assertEquals("Account already exists with iban : " + firstAccount.getIban().toString(), e.getMessage());
+        }
+    }
+
+    @Test
+    public void createAccountExistsNameSurnameTest() {
+        try {
+            accountService.createAccount(firstAccount);
+            accountService.createAccount(secondAccount);
+        } catch (AccountExistsException e) {
+            Assert.assertEquals("Account already exists with name : " + firstAccount.getName() + " or surname : " + firstAccount.getSurname() + "", e.getMessage());
         }
     }
 
     @Test
     public void getAllAccountsTest() {
-        entityManager.persist(account);
+        entityManager.persist(firstAccount);
         entityManager.flush();
         List<Account> allAccounts = accountService.getAllAccounts();
         Assert.assertEquals(1, allAccounts.size());

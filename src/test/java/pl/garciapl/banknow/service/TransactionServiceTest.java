@@ -21,7 +21,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * Created by lukasz on 05.07.15.
+ * TransactionServiceTest
+ * @author lukasz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:banknow-ctx.xml", "classpath:banknow-db-ctx.xml"})

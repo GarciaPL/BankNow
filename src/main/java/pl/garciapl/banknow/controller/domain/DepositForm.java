@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * Created by lukasz on 04.07.15.
+ * DepositForm
+ * @author lukasz
  */
 public class DepositForm {
 
@@ -25,13 +26,5 @@ public class DepositForm {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-
-    @Override
-    public String toString() {
-        return "DepositForm{" +
-                "recipient=" + recipient +
-                ", amount=" + amount +
-                '}';
     }
 }

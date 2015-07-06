@@ -21,7 +21,7 @@ public class TransactionsController {
     private TransactionService transactionService;
 
     /**
-     * Returns view for performing desposit operations
+     * Returns view for performing deposit operations
      * @param model Model
      * @return Transaction view
      */

@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * Created by lukasz on 05.07.15.
+ * TransferForm
+ * @author lukasz
  */
 public class TransferForm {
 
@@ -36,12 +37,4 @@ public class TransferForm {
         this.amount = amount;
     }
 
-    @Override
-    public String toString() {
-        return "TransferForm{" +
-                "sender='" + sender + '\'' +
-                ", recipient='" + recipient + '\'' +
-                ", amount='" + amount + '\'' +
-                '}';
-    }
 }

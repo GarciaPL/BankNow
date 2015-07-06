@@ -80,14 +80,4 @@ public class Transaction implements Serializable {
         this.type = transactionType;
     }
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", sender=" + sender +
-                ", recipient=" + recipient +
-                ", amount=" + amount +
-                ", transactionType=" + type +
-                '}';
-    }
 }

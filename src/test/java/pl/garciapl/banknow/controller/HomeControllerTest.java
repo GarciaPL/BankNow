@@ -4,6 +4,8 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -15,7 +17,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
- * Created by lukasz on 04.07.15.
+ * HomeControllerTest
+ * @author lukasz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -25,10 +28,13 @@ public class HomeControllerTest {
     private MockMvc mockMvc;
     private InternalResourceViewResolver viewResolver;
 
+    @InjectMocks
+    private HomeController homeController;
+
     @Before
     public void setup() {
 
-        HomeController homeController = new HomeController();
+        MockitoAnnotations.initMocks(this);
 
         viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/views/");
@@ -38,19 +44,19 @@ public class HomeControllerTest {
     }
 
     @Test
-    public void homeControllerTest() throws Exception {
+    public void getTest() throws Exception {
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/hello")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
         String contentAsString = mvcResult.getResponse().getContentAsString();
         Assert.assertEquals("Hello BankNow!", contentAsString);
     }
 
     @Test
-    public void indexControllerTest() throws Exception {
+    public void getIndexTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/index")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("index")).andReturn();
     }
 
     @Test
-    public void mainControllerTest() throws Exception {
+    public void getMainTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("index")).andReturn();
     }
 }
