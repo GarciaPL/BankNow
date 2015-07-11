@@ -65,4 +65,3 @@ Code released under the MIT License (MIT). Docs released under Creative Commons.
 - [Jetty](http://www.eclipse.org/jetty/)
 - [DataTables](https://datatables.net)
 - [jqBootstrapValidation](http://reactiveraven.github.io/jqBootstrapValidation/)
-
