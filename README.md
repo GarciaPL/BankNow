@@ -1,5 +1,13 @@
 ## BankNow
 
+Web application for teller that provides features like :
+1. **Create account(s)** - a user can create an account, associate a name with it, give it a unique
+account number, add a starting balance, etc.
+2. **Make lodgement** - a user can lodge an amount into an account (balance increase)
+3. **Make transfer** - a user can transfer an amount from one account to another (balance
+transfer)
+4. **View transactions** - a user can view recent, or all, transactions for an account (statement)
+
 ## Technology
 
 ##### Environment
