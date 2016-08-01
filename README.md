@@ -60,6 +60,13 @@ To run jetty use command **mvn jetty:run** in directory of project. After that a
 ## WAR
 War can be build using command **mvn war:war** in directory of project. War will be accessible under directory /target and called **banknow.war**
 
+## Screenshots
+
+![Home](https://github.com/GarciaPL/GarciaPL.github.io/blob/master/img/banknow/Home.png "Home")
+![CreateAccount](https://github.com/GarciaPL/GarciaPL.github.io/blob/master/img/banknow/CreateAccount.png "Create Account")
+![DespoitMoney](https://github.com/GarciaPL/GarciaPL.github.io/blob/master/img/banknow/DepositMoney.png "Despoit Money")
+![Transactions](https://github.com/GarciaPL/GarciaPL.github.io/blob/master/img/banknow/Transactions.png "Transactions")
+
 ## License
 Code released under the MIT License (MIT). Docs released under Creative Commons.
 
