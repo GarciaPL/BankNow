@@ -1,12 +1,12 @@
 package pl.garciapl.banknow.service;
 
+import java.util.List;
 import pl.garciapl.banknow.model.Account;
 import pl.garciapl.banknow.service.exceptions.AccountExistsException;
 
-import java.util.List;
-
 /**
  * AccountService - interface for AccountServiceImpl
+ *
  * @author lukasz
  */
 public interface AccountService {

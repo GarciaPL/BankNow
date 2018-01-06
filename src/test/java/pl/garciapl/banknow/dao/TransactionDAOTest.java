@@ -1,6 +1,13 @@
 package pl.garciapl.banknow.dao;
 
-import junit.framework.Assert;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,16 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.garciapl.banknow.model.Transaction;
 import pl.garciapl.banknow.model.TransactionType;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.List;
-
-/**
- * TransactionDAOTest
- * @author lukasz
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:banknow-db-ctx.xml")
 @Transactional
@@ -42,23 +39,27 @@ public class TransactionDAOTest {
     @Test
     public void emptyAtStartTest() {
         List<Transaction> results = entityManager.createQuery("from Transaction ").getResultList();
-        Assert.assertTrue(results.isEmpty());
+
+        assertTrue(results.isEmpty());
     }
 
     @Test
     public void persistObjectTest() {
-        Assert.assertEquals(0, entityManager.createQuery("from Transaction").getResultList().size());
+        assertEquals(0, entityManager.createQuery("from Transaction").getResultList().size());
         entityManager.persist(transaction);
         entityManager.flush();
-        Assert.assertEquals(1, entityManager.createQuery("from Transaction").getResultList().size());
+        assertEquals(1, entityManager.createQuery("from Transaction").getResultList().size());
     }
 
     @Test
     public void createTransactionTest() {
         transactionDao.storeTransaction(transaction);
-        Assert.assertEquals(1, entityManager.createQuery("from Transaction").getResultList().size());
-        Assert.assertEquals(this.transaction.getSender(), entityManager.createQuery("from Transaction", Transaction.class).getSingleResult().getSender());
-        Assert.assertEquals(this.transaction.getRecipient(), entityManager.createQuery("from Transaction", Transaction.class).getSingleResult().getRecipient());
+
+        assertEquals(1, entityManager.createQuery("from Transaction").getResultList().size());
+        assertEquals(this.transaction.getSender(),
+                entityManager.createQuery("from Transaction", Transaction.class).getSingleResult().getSender());
+        assertEquals(this.transaction.getRecipient(),
+                entityManager.createQuery("from Transaction", Transaction.class).getSingleResult().getRecipient());
     }
 
     @Test
@@ -66,6 +67,7 @@ public class TransactionDAOTest {
         entityManager.persist(transaction);
         entityManager.flush();
         List<Transaction> allTransactions = transactionDao.getAllTransactions();
-        Assert.assertEquals(1, allTransactions.size());
+
+        assertEquals(1, allTransactions.size());
     }
 }

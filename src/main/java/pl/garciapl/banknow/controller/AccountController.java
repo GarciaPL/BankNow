@@ -1,5 +1,6 @@
 package pl.garciapl.banknow.controller;
 
+import java.util.List;
 import org.joda.money.CurrencyUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,12 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.garciapl.banknow.controller.domain.AccountForm;
+import pl.garciapl.banknow.controller.form.AccountForm;
 import pl.garciapl.banknow.model.Account;
 import pl.garciapl.banknow.service.AccountService;
 import pl.garciapl.banknow.service.exceptions.AccountExistsException;
-
-import java.util.List;
 
 /**
  * AccountController - responsible for creation of account
@@ -54,8 +53,8 @@ public class AccountController {
      * Performs registration of new account
      *
      * @param accountForm AccountForm
-     * @param result      BindingResult
-     * @param model       Model
+     * @param result BindingResult
+     * @param model Model
      * @return Model with appropriate message and currencies
      */
 

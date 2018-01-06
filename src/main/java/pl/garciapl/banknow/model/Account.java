@@ -1,12 +1,17 @@
 package pl.garciapl.banknow.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Account
+ *
  * @author lukasz
  */
 @Entity(name = "Account")

@@ -1,11 +1,16 @@
 package pl.garciapl.banknow.controller;
 
+import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,11 +23,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import pl.garciapl.banknow.model.Transaction;
 import pl.garciapl.banknow.model.TransactionType;
 import pl.garciapl.banknow.service.TransactionService;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by lukasz on 05.07.15.
@@ -53,7 +53,7 @@ public class TransactionsControllerTest {
         List<Transaction> transactions = new ArrayList<Transaction>();
         transactions.add(transaction);
 
-        Mockito.when(transactionService.getAllTransactions()).thenReturn(transactions);
+        when(transactionService.getAllTransactions()).thenReturn(transactions);
 
         viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/views/");
@@ -64,6 +64,7 @@ public class TransactionsControllerTest {
 
     @Test
     public void getTransactionsTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/transactions")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("transactions")).andReturn();
+        mockMvc.perform(MockMvcRequestBuilders.get("/transactions")).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("transactions")).andReturn();
     }
 }

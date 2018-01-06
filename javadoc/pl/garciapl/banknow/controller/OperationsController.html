@@ -178,7 +178,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="../../../../pl/garciapl/banknow/controller/OperationsController.html#makeDeposit(pl.garciapl.banknow.controller.domain.DepositForm,%20org.springframework.validation.BindingResult,%20org.springframework.ui.Model)">makeDeposit</a></strong>(<a href="../../../../pl/garciapl/banknow/controller/domain/DepositForm.html" title="class in pl.garciapl.banknow.controller.domain">DepositForm</a>&nbsp;depositForm,
+<td class="colLast"><code><strong><a href="../../../../pl/garciapl/banknow/controller/OperationsController.html#makeDeposit(pl.garciapl.banknow.controller.domain.DepositForm,%20org.springframework.validation.BindingResult,%20org.springframework.ui.Model)">makeDeposit</a></strong>(<a href="../../../../pl/garciapl/banknow/controller/domain/DepositForm.html" title="class in pl.garciapl.banknow.controller.form">DepositForm</a>&nbsp;depositForm,
            org.springframework.validation.BindingResult&nbsp;result,
            org.springframework.ui.Model&nbsp;model)</code>
 <div class="block">Performs deposit of funds on account</div>
@@ -186,7 +186,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><strong><a href="../../../../pl/garciapl/banknow/controller/OperationsController.html#makeTransfer(pl.garciapl.banknow.controller.domain.TransferForm,%20org.springframework.validation.BindingResult,%20org.springframework.ui.Model)">makeTransfer</a></strong>(<a href="../../../../pl/garciapl/banknow/controller/domain/TransferForm.html" title="class in pl.garciapl.banknow.controller.domain">TransferForm</a>&nbsp;transferForm,
+<td class="colLast"><code><strong><a href="../../../../pl/garciapl/banknow/controller/OperationsController.html#makeTransfer(pl.garciapl.banknow.controller.domain.TransferForm,%20org.springframework.validation.BindingResult,%20org.springframework.ui.Model)">makeTransfer</a></strong>(<a href="../../../../pl/garciapl/banknow/controller/domain/TransferForm.html" title="class in pl.garciapl.banknow.controller.form">TransferForm</a>&nbsp;transferForm,
             org.springframework.validation.BindingResult&nbsp;result,
             org.springframework.ui.Model&nbsp;model)</code>
 <div class="block">Performs transfer of funds from one account to another account</div>
@@ -275,7 +275,7 @@ public&nbsp;java.lang.String&nbsp;getDeposit(org.springframework.ui.Model&nbsp;m
 <dt><span class="strong">Returns:</span></dt><dd>Deposit view</dd></dl>
 </li>
 </ul>
-<a name="makeDeposit(pl.garciapl.banknow.controller.domain.DepositForm, org.springframework.validation.BindingResult, org.springframework.ui.Model)">
+<a name="makeDeposit(pl.garciapl.banknow.controller.form.DepositForm, org.springframework.validation.BindingResult, org.springframework.ui.Model)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -283,7 +283,7 @@ public&nbsp;java.lang.String&nbsp;getDeposit(org.springframework.ui.Model&nbsp;m
 <h4>makeDeposit</h4>
 <pre>@RequestMapping(value="/deposit",
                 method=POST)
-public&nbsp;java.lang.String&nbsp;makeDeposit(<a href="../../../../pl/garciapl/banknow/controller/domain/DepositForm.html" title="class in pl.garciapl.banknow.controller.domain">DepositForm</a>&nbsp;depositForm,
+public&nbsp;java.lang.String&nbsp;makeDeposit(<a href="../../../../pl/garciapl/banknow/controller/domain/DepositForm.html" title="class in pl.garciapl.banknow.controller.form">DepositForm</a>&nbsp;depositForm,
                                           org.springframework.validation.BindingResult&nbsp;result,
                                           org.springframework.ui.Model&nbsp;model)</pre>
 <div class="block">Performs deposit of funds on account</div>
@@ -305,7 +305,7 @@ public&nbsp;java.lang.String&nbsp;getTransfer(org.springframework.ui.Model&nbsp;
 <dt><span class="strong">Returns:</span></dt><dd>Transfer view</dd></dl>
 </li>
 </ul>
-<a name="makeTransfer(pl.garciapl.banknow.controller.domain.TransferForm, org.springframework.validation.BindingResult, org.springframework.ui.Model)">
+<a name="makeTransfer(pl.garciapl.banknow.controller.form.TransferForm, org.springframework.validation.BindingResult, org.springframework.ui.Model)">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -313,7 +313,7 @@ public&nbsp;java.lang.String&nbsp;getTransfer(org.springframework.ui.Model&nbsp;
 <h4>makeTransfer</h4>
 <pre>@RequestMapping(value="/transfer",
                 method=POST)
-public&nbsp;java.lang.String&nbsp;makeTransfer(<a href="../../../../pl/garciapl/banknow/controller/domain/TransferForm.html" title="class in pl.garciapl.banknow.controller.domain">TransferForm</a>&nbsp;transferForm,
+public&nbsp;java.lang.String&nbsp;makeTransfer(<a href="../../../../pl/garciapl/banknow/controller/domain/TransferForm.html" title="class in pl.garciapl.banknow.controller.form">TransferForm</a>&nbsp;transferForm,
                                            org.springframework.validation.BindingResult&nbsp;result,
                                            org.springframework.ui.Model&nbsp;model)</pre>
 <div class="block">Performs transfer of funds from one account to another account</div>

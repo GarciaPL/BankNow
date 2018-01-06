@@ -9,6 +9,7 @@ import pl.garciapl.banknow.service.TransactionService;
 
 /**
  * TransactionsController - responsible for providing transactions information
+ *
  * @author lukasz
  */
 @Controller
@@ -22,6 +23,7 @@ public class TransactionsController {
 
     /**
      * Returns view for performing deposit operations
+     *
      * @param model Model
      * @return Transaction view
      */

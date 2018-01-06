@@ -1,6 +1,13 @@
 package pl.garciapl.banknow.dao;
 
-import junit.framework.Assert;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,16 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import pl.garciapl.banknow.model.Account;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.List;
-
-/**
- * AccountDAOTest
- * @author lukasz
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:banknow-db-ctx.xml")
 @Transactional
@@ -35,29 +32,33 @@ public class AccountDAOTest {
 
     @Before
     public void setup() {
-        account = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25), "EUR");
+        account = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25),
+                "EUR");
     }
 
     @Test
     public void emptyAtStartTest() {
         List<Account> results = entityManager.createQuery("from Account").getResultList();
-        Assert.assertTrue(results.isEmpty());
+
+        assertTrue(results.isEmpty());
     }
 
     @Test
     public void persistObjectTest() {
-        Assert.assertEquals(0, entityManager.createQuery("from Account").getResultList().size());
+        assertEquals(0, entityManager.createQuery("from Account").getResultList().size());
         entityManager.persist(account);
         entityManager.flush();
-        Assert.assertEquals(1, entityManager.createQuery("from Account").getResultList().size());
+        assertEquals(1, entityManager.createQuery("from Account").getResultList().size());
     }
 
     @Test
     public void createAccountTest() {
         accountDao.createAccount(account);
-        Assert.assertEquals(1, entityManager.createQuery("from Account").getResultList().size());
-        Assert.assertEquals(this.account.getName(), entityManager.createQuery("from Account", Account.class).getSingleResult().getName());
-        Assert.assertEquals(this.account.getSurname(), entityManager.createQuery("from Account", Account.class).getSingleResult().getSurname());
+
+        assertEquals(1, entityManager.createQuery("from Account").getResultList().size());
+        assertEquals(this.account.getName(), entityManager.createQuery("from Account", Account.class).getSingleResult().getName());
+        assertEquals(this.account.getSurname(),
+                entityManager.createQuery("from Account", Account.class).getSingleResult().getSurname());
     }
 
     @Test
@@ -65,9 +66,9 @@ public class AccountDAOTest {
         account.setName("mark");
         account.setSurname("wahlberg");
         accountDao.updateAccount(account);
-        Assert.assertEquals(1, entityManager.createQuery("from Account").getResultList().size());
-        Assert.assertEquals("mark", entityManager.createQuery("from Account", Account.class).getSingleResult().getName());
-        Assert.assertEquals("wahlberg", entityManager.createQuery("from Account", Account.class).getSingleResult().getSurname());
+        assertEquals(1, entityManager.createQuery("from Account").getResultList().size());
+        assertEquals("mark", entityManager.createQuery("from Account", Account.class).getSingleResult().getName());
+        assertEquals("wahlberg", entityManager.createQuery("from Account", Account.class).getSingleResult().getSurname());
     }
 
     @Test
@@ -75,7 +76,8 @@ public class AccountDAOTest {
         entityManager.persist(account);
         entityManager.flush();
         List<Account> allAccounts = accountDao.getAllAccounts();
-        Assert.assertEquals(1, allAccounts.size());
+
+        assertEquals(1, allAccounts.size());
     }
 
     @Test
@@ -83,13 +85,15 @@ public class AccountDAOTest {
         entityManager.persist(account);
         entityManager.flush();
         Account accountByIban = accountDao.getAccountByIban(account.getIban());
-        Assert.assertEquals(account.getIban(), accountByIban.getIban());
+
+        assertEquals(account.getIban(), accountByIban.getIban());
     }
 
     @Test
     public void getAccountByIbanReturnsNull() {
         Account accountByIban = accountDao.getAccountByIban(account.getIban());
-        Assert.assertEquals(null, accountByIban);
+
+        assertEquals(null, accountByIban);
     }
 
     @Test
@@ -97,13 +101,15 @@ public class AccountDAOTest {
         entityManager.persist(account);
         entityManager.flush();
         Account accountByNameSurname = accountDao.getAccountByNameSurname(account.getName(), account.getSurname());
-        Assert.assertEquals(account.getName(), accountByNameSurname.getName());
-        Assert.assertEquals(account.getSurname(), accountByNameSurname.getSurname());
+
+        assertEquals(account.getName(), accountByNameSurname.getName());
+        assertEquals(account.getSurname(), accountByNameSurname.getSurname());
     }
 
     @Test
     public void getAccountByNameSurnameReturnsNull() {
         Account accountByNameSurname = accountDao.getAccountByNameSurname(account.getName(), account.getSurname());
-        Assert.assertEquals(null, accountByNameSurname);
+
+        assertEquals(null, accountByNameSurname);
     }
 }

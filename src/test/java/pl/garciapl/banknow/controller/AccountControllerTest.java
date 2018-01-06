@@ -1,12 +1,16 @@
 package pl.garciapl.banknow.controller;
 
-import junit.framework.Assert;
+import static junit.framework.Assert.assertNull;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,19 +23,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import pl.garciapl.banknow.controller.domain.AccountForm;
+import pl.garciapl.banknow.controller.form.AccountForm;
 import pl.garciapl.banknow.dao.AccountDAO;
 import pl.garciapl.banknow.model.Account;
 import pl.garciapl.banknow.service.AccountService;
 import pl.garciapl.banknow.service.exceptions.AccountExistsException;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
-/**
- * AccountControllerTest
- * @author lukasz
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:banknow-ctx.xml", "classpath:banknow-db-ctx.xml", "classpath:dispatcher-servlet-test.xml"})
@@ -64,7 +61,8 @@ public class AccountControllerTest {
 
         MockitoAnnotations.initMocks(this);
 
-        account = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25), "EUR");
+        account = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25),
+                "EUR");
 
         accountForm = new AccountForm();
         accountForm.setName("john");
@@ -85,7 +83,8 @@ public class AccountControllerTest {
     @Test
     public void getAccountTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/account")).andExpect(MockMvcResultMatchers.status().isOk()).
-                andExpect(MockMvcResultMatchers.view().name("account")).andExpect(MockMvcResultMatchers.model().attributeExists("currencies")).andReturn();
+                andExpect(MockMvcResultMatchers.view().name("account"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("currencies")).andReturn();
     }
 
     @Test
@@ -104,16 +103,19 @@ public class AccountControllerTest {
 
     @Test
     public void postBindingResultsErrorTest() throws Exception {
-        Mockito.when(bindingResult.hasErrors()).thenReturn(true);
+        when(bindingResult.hasErrors()).thenReturn(true);
         String response = accountController.createAccount(accountForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postAccountExistsErrorTest() throws Exception {
-        Mockito.doThrow(new AccountExistsException("Account already exists with iban : " + account.getIban())).when(accountService).createAccount(
-                new Account(accountForm.getName(), accountForm.getSurname(), accountForm.getAddress(),
-                        accountForm.getPhone(), accountForm.getIban(), accountForm.getBalance(), accountForm.getCurrency()));
+        doThrow(new AccountExistsException("Account already exists with iban : " + account.getIban())).when(accountService)
+                .createAccount(
+                        new Account(accountForm.getName(), accountForm.getSurname(), accountForm.getAddress(),
+                                accountForm.getPhone(), accountForm.getIban(), accountForm.getBalance(), accountForm.getCurrency()));
+
         accountController.createAccount(accountForm, bindingResult, model);
     }
 }

@@ -1,11 +1,11 @@
 package pl.garciapl.banknow.dao;
 
-import pl.garciapl.banknow.model.Transaction;
-
 import java.util.List;
+import pl.garciapl.banknow.model.Transaction;
 
 /**
  * TransactionDAO - interface for TransactionDAOImpl
+ *
  * @author lukasz
  */
 public interface TransactionDAO {

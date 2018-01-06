@@ -1,25 +1,17 @@
-package pl.garciapl.banknow.controller.domain;
+package pl.garciapl.banknow.controller.form;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * TransferForm
+ * DepositForm
+ *
  * @author lukasz
  */
-public class TransferForm {
+public class DepositForm {
 
-    private BigInteger sender;
     private BigInteger recipient;
     private BigDecimal amount;
-
-    public BigInteger getSender() {
-        return sender;
-    }
-
-    public void setSender(BigInteger sender) {
-        this.sender = sender;
-    }
 
     public BigInteger getRecipient() {
         return recipient;
@@ -36,5 +28,4 @@ public class TransferForm {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-
 }

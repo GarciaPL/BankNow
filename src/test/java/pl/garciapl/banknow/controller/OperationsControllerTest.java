@@ -1,12 +1,18 @@
 package pl.garciapl.banknow.controller;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,23 +25,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import pl.garciapl.banknow.controller.domain.DepositForm;
-import pl.garciapl.banknow.controller.domain.TransferForm;
+import pl.garciapl.banknow.controller.form.DepositForm;
+import pl.garciapl.banknow.controller.form.TransferForm;
 import pl.garciapl.banknow.model.Account;
 import pl.garciapl.banknow.service.AccountService;
 import pl.garciapl.banknow.service.TransactionService;
 import pl.garciapl.banknow.service.exceptions.GenericBankNowException;
 import pl.garciapl.banknow.service.exceptions.InsufficientFundsException;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * OperationsControllerTest
- * @author lukasz
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:banknow-ctx.xml", "classpath:banknow-db-ctx.xml", "classpath:dispatcher-servlet-test.xml"})
@@ -70,7 +67,8 @@ public class OperationsControllerTest {
 
         MockitoAnnotations.initMocks(this);
 
-        account = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25), "EUR");
+        account = new Account("john", "malkovich", "Ireland", new BigInteger("500600700"), new BigInteger("1234567890"), new BigDecimal(25),
+                "EUR");
 
         depositForm = new DepositForm();
         depositForm.setRecipient(new BigInteger("1234567890"));
@@ -81,10 +79,10 @@ public class OperationsControllerTest {
         transferForm.setRecipient(new BigInteger("2345678901"));
         transferForm.setAmount(new BigDecimal(5));
 
-        List<Account> accounts = new ArrayList<Account>();
+        List<Account> accounts = new ArrayList<>();
         accounts.add(account);
 
-        Mockito.when(accountService.getAllAccounts()).thenReturn(accounts);
+        when(accountService.getAllAccounts()).thenReturn(accounts);
 
         viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/views/");
@@ -95,40 +93,46 @@ public class OperationsControllerTest {
 
     @Test
     public void getDepositTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/deposit")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("deposit")).andReturn();
+        mockMvc.perform(MockMvcRequestBuilders.get("/deposit")).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("deposit")).andReturn();
     }
 
     @Test
     public void postDepositTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/deposit").contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("recipient", "1234567890")
-                .param("amount", "25")).andExpect(MockMvcResultMatchers.redirectedUrl("deposit?message=Deposit+successfully+executed")).andReturn();
+                .param("amount", "25")).andExpect(MockMvcResultMatchers.redirectedUrl("deposit?message=Deposit+successfully+executed"))
+                .andReturn();
     }
 
     @Test
     public void postDepositBindingResultsErrorTest() throws Exception {
-        Mockito.when(bindingResult.hasErrors()).thenReturn(true);
+        when(bindingResult.hasErrors()).thenReturn(true);
         String response = operationsController.makeDeposit(depositForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postDepositRecipientNullTest() throws Exception {
         depositForm.setRecipient(null);
         String response = operationsController.makeDeposit(depositForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postDepositAmountZeroTest() throws Exception {
         depositForm.setAmount(BigDecimal.ZERO);
         String response = operationsController.makeDeposit(depositForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void getTransferTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/transfer")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("transfer")).andReturn();
+        mockMvc.perform(MockMvcRequestBuilders.get("/transfer")).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("transfer")).andReturn();
     }
 
     @Test
@@ -136,56 +140,68 @@ public class OperationsControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/transfer").contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("sender", "1234567890")
                 .param("recipient", "2345678901")
-                .param("amount", "5")).andExpect(MockMvcResultMatchers.redirectedUrl("transfer?message=Transfer+successfully+executed")).andReturn();
+                .param("amount", "5")).andExpect(MockMvcResultMatchers.redirectedUrl("transfer?message=Transfer+successfully+executed"))
+                .andReturn();
     }
 
     @Test
     public void postTransferBindingResultsErrorTest() throws Exception {
-        Mockito.when(bindingResult.hasErrors()).thenReturn(true);
+        when(bindingResult.hasErrors()).thenReturn(true);
         String response = operationsController.makeTransfer(transferForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postTransferSenderNullTest() throws Exception {
         transferForm.setSender(null);
         String response = operationsController.makeTransfer(transferForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postTransferRecipientNullTest() throws Exception {
         transferForm.setRecipient(null);
         String response = operationsController.makeTransfer(transferForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postTransferAmountNullTest() throws Exception {
         transferForm.setAmount(null);
         String response = operationsController.makeTransfer(transferForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postTransferAmountZeroTest() throws Exception {
         transferForm.setAmount(BigDecimal.ZERO);
         String response = operationsController.makeTransfer(transferForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postTransferInsufficientFundsExceptionTest() throws Exception {
-        Mockito.doThrow(new InsufficientFundsException("Insufficient funds")).when(transactionService).makeTransfer(transferForm.getSender(), transferForm.getRecipient(), transferForm.getAmount());
+        doThrow(new InsufficientFundsException("Insufficient funds")).when(transactionService)
+                .makeTransfer(transferForm.getSender(), transferForm.getRecipient(), transferForm.getAmount());
+
         String response = operationsController.makeTransfer(transferForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
     @Test
     public void postTransferGenericBankNowExceptionTest() throws Exception {
-        Mockito.doThrow(new GenericBankNowException("Sender and recipient are the same accounts")).when(transactionService).makeTransfer(transferForm.getSender(), transferForm.getRecipient(), transferForm.getAmount());
+        doThrow(new GenericBankNowException("Sender and recipient are the same accounts")).when(transactionService)
+                .makeTransfer(transferForm.getSender(), transferForm.getRecipient(), transferForm.getAmount());
+
         String response = operationsController.makeTransfer(transferForm, bindingResult, model);
-        Assert.assertNull(response);
+
+        assertNull(response);
     }
 
 }

@@ -1,15 +1,15 @@
 package pl.garciapl.banknow.dao.impl;
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 import pl.garciapl.banknow.dao.TransactionDAO;
 import pl.garciapl.banknow.model.Transaction;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
-
 /**
  * TransactionDAOImpl - provides data access for transaction purposes
+ *
  * @author lukasz
  */
 @Transactional
@@ -20,6 +20,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 
     /**
      * Persists transaction model
+     *
      * @param transaction Transaction
      */
     @Override
@@ -29,6 +30,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 
     /**
      * Fetches all transactions
+     *
      * @return List of transactions
      */
     @Override

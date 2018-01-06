@@ -1,21 +1,20 @@
 package pl.garciapl.banknow.controller;
 
+import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.garciapl.banknow.controller.domain.DepositForm;
-import pl.garciapl.banknow.controller.domain.TransferForm;
+import pl.garciapl.banknow.controller.form.DepositForm;
+import pl.garciapl.banknow.controller.form.TransferForm;
 import pl.garciapl.banknow.model.Account;
 import pl.garciapl.banknow.service.AccountService;
 import pl.garciapl.banknow.service.TransactionService;
 import pl.garciapl.banknow.service.exceptions.GenericBankNowException;
 import pl.garciapl.banknow.service.exceptions.InsufficientFundsException;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * OperationsController - responsible for perform deposit and transfer operations
@@ -55,8 +54,8 @@ public class OperationsController {
      * Performs deposit of funds on account
      *
      * @param depositForm DepositForm
-     * @param result      BindingResult
-     * @param model       Model
+     * @param result BindingResult
+     * @param model Model
      * @return Model with appropriate message and accounts
      */
 
@@ -101,8 +100,8 @@ public class OperationsController {
      * Performs transfer of funds from one account to another account
      *
      * @param transferForm TransferForm
-     * @param result       BindingResult
-     * @param model        Model
+     * @param result BindingResult
+     * @param model Model
      * @return Model with appropriate message and accounts
      */
 

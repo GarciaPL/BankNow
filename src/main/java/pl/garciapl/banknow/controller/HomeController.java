@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * HomeController - responsible for index view presentation
+ *
  * @author lukasz
  */
 
@@ -15,6 +16,7 @@ public class HomeController {
 
     /**
      * Returns string with test message
+     *
      * @return Hello BankNow!
      */
 
@@ -26,6 +28,7 @@ public class HomeController {
 
     /**
      * Returns index view
+     *
      * @return Index view
      */
 
@@ -36,6 +39,7 @@ public class HomeController {
 
     /**
      * Returns index view
+     *
      * @return Index view
      */
 

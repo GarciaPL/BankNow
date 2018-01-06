@@ -1,10 +1,11 @@
-package pl.garciapl.banknow.controller.domain;
+package pl.garciapl.banknow.controller.form;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
  * AccountForm - model for form of account
+ *
  * @author lukasz
  */
 public class AccountForm {

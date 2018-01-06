@@ -1,5 +1,8 @@
 package pl.garciapl.banknow.service.impl;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import pl.garciapl.banknow.dao.AccountDAO;
@@ -11,12 +14,9 @@ import pl.garciapl.banknow.service.TransactionService;
 import pl.garciapl.banknow.service.exceptions.GenericBankNowException;
 import pl.garciapl.banknow.service.exceptions.InsufficientFundsException;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.List;
-
 /**
  * TransactionServiceImpl - provides business logic for transaction purposes
+ *
  * @author lukasz
  */
 public class TransactionServiceImpl implements TransactionService {
@@ -31,6 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * Fetches all transactions
+     *
      * @return List of transactions
      */
     @Override
@@ -40,14 +41,14 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * Performs transfer of funds between two accounts
+     *
      * @param sender Sender IBAN
      * @param recipient Recipient IBAN
      * @param amount Amount of funds
-     * @throws InsufficientFundsException
-     * @throws GenericBankNowException
      */
     @Override
-    public void makeTransfer(BigInteger sender, BigInteger recipient, BigDecimal amount) throws InsufficientFundsException, GenericBankNowException {
+    public void makeTransfer(BigInteger sender, BigInteger recipient, BigDecimal amount)
+            throws InsufficientFundsException, GenericBankNowException {
         if (sender.compareTo(recipient) == 0) {
             throw new GenericBankNowException("Sender and recipient are the same accounts");
         } else {
@@ -69,6 +70,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * Performs deposit of funds to one account
+     *
      * @param account Recipient IBAN
      * @param amount Amount of funds
      */
