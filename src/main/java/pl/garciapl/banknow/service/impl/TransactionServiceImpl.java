@@ -49,11 +49,11 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void makeTransfer(BigInteger sender, BigInteger recipient, BigDecimal amount)
             throws InsufficientFundsException, GenericBankNowException {
-        if (sender.compareTo(recipient) == 0) {
+        if (isTheSameAccount(sender, recipient)) {
             throw new GenericBankNowException("Sender and recipient are the same accounts");
         } else {
             Account accountSender = accountDao.getAccountByIban(sender);
-            if (accountSender.getBalance().compareTo(amount) < 0) {
+            if (hasEfficientFunds(accountSender, amount)) {
                 throw new InsufficientFundsException("Insufficient funds to proceed transfer");
             } else {
                 Account accountRecipient = accountDao.getAccountByIban(recipient);
@@ -66,6 +66,14 @@ public class TransactionServiceImpl implements TransactionService {
                 transactionDao.storeTransaction(new Transaction(sender, recipient, amount, TransactionType.TRANSFER));
             }
         }
+    }
+
+    private boolean isTheSameAccount(BigInteger sender, BigInteger recipient) {
+        return sender.compareTo(recipient) == 0;
+    }
+
+    private boolean hasEfficientFunds(Account account, BigDecimal amount) {
+        return account.getBalance().compareTo(amount) < 0;
     }
 
     /**

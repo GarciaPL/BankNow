@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.NoArgsConstructor;
 
 /**
  * Account
@@ -15,6 +16,7 @@ import javax.persistence.Id;
  * @author lukasz
  */
 @Entity(name = "Account")
+@NoArgsConstructor
 public class Account implements Serializable {
 
     @Id
@@ -42,9 +44,6 @@ public class Account implements Serializable {
 
     @Column(name = "currency")
     private String currency;
-
-    public Account() {
-    }
 
     public Account(String name, String surname, String address, BigInteger phone, BigInteger iban, BigDecimal balance, String currency) {
         this.name = name;

@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.NoArgsConstructor;
 
 /**
  * Transaction
@@ -17,6 +18,7 @@ import javax.persistence.Id;
  * @author lukasz
  */
 @Entity(name = "Transaction")
+@NoArgsConstructor
 public class Transaction implements Serializable {
 
     @Id
@@ -36,9 +38,6 @@ public class Transaction implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private TransactionType type;
-
-    public Transaction() {
-    }
 
     public Transaction(BigInteger sender, BigInteger recipient, BigDecimal amount, TransactionType type) {
         this.sender = sender;

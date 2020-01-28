@@ -1,5 +1,9 @@
 package pl.garciapl.banknow.dao.impl;
 
+import static pl.garciapl.banknow.dao.impl.AccountSQL.SELECT_ACCOUNT;
+import static pl.garciapl.banknow.dao.impl.AccountSQL.SELECT_ACCOUNT_FOR_IBAN;
+import static pl.garciapl.banknow.dao.impl.AccountSQL.SELECT_ACCOUNT_FOR_NAME_AND_SURNAME;
+
 import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -46,7 +50,7 @@ public class AccountDAOImpl implements AccountDAO {
      */
     @Override
     public List<Account> getAllAccounts() {
-        return entityManager.createQuery("Select a FROM Account a", Account.class).getResultList();
+        return entityManager.createQuery(SELECT_ACCOUNT, Account.class).getResultList();
     }
 
     /**
@@ -57,8 +61,9 @@ public class AccountDAOImpl implements AccountDAO {
      */
     @Override
     public Account getAccountByIban(BigInteger iban) {
-        List<Account> results = entityManager.createQuery("Select a FROM Account a where a.iban = ?1", Account.class).setParameter(1, iban)
-                .getResultList();
+        List<Account> results = entityManager.createQuery(SELECT_ACCOUNT_FOR_IBAN, Account.class)
+            .setParameter(1, iban)
+            .getResultList();
         if (results == null || results.isEmpty()) {
             return null;
         } else {
@@ -76,8 +81,9 @@ public class AccountDAOImpl implements AccountDAO {
     @Override
     public Account getAccountByNameSurname(String name, String surname) {
         List<Account> results = entityManager
-                .createQuery("Select a FROM Account a where a.name like ?1 and a.surname like ?2", Account.class).
-                        setParameter(1, name).setParameter(2, surname).getResultList();
+            .createQuery(SELECT_ACCOUNT_FOR_NAME_AND_SURNAME, Account.class)
+            .setParameter(1, name).setParameter(2, surname)
+            .getResultList();
         if (results == null || results.isEmpty()) {
             return null;
         } else {
