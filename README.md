@@ -77,8 +77,6 @@ Code released under the MIT License (MIT). Docs released under Creative Commons.
 - [DataTables](https://datatables.net)
 - [jqBootstrapValidation](http://reactiveraven.github.io/jqBootstrapValidation/)
 
-[![ghit.me](https://ghit.me/badge.svg?repo=GarciaPL/BankNow)](https://ghit.me/repo/GarciaPL/BankNow)
-
 [![Build Status](https://travis-ci.org/GarciaPL/BankNow.svg?branch=master)](https://travis-ci.org/GarciaPL/BankNow)
 
 [![Known Vulnerabilities](https://snyk.io/test/github/garciapl/banknow/badge.svg)](https://snyk.io/test/github/garciapl/banknow)
