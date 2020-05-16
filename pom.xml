@@ -33,7 +33,7 @@
         <servlet.version>3.1.0</servlet.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <jackson.core.version>2.5.0</jackson.core.version>
-        <jackson.databind.version>2.5.0</jackson.databind.version>
+        <jackson.databind.version>2.9.9.1</jackson.databind.version>
         <jackson.annotations.version>2.5.0</jackson.annotations.version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <hsqldb.version>2.3.3</hsqldb.version>
